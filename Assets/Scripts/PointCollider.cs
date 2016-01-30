@@ -5,6 +5,9 @@ public class PointCollider : MonoBehaviour {
 
 	public Transform nextPoint;
 
+	public Component finishComponent;
+	public string finishFunction;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -14,12 +17,17 @@ public class PointCollider : MonoBehaviour {
 	void Update () {
 	}
 
+	void ActivateNextPoint()
+	{
+		if (nextPoint) 
+			nextPoint.gameObject.SetActive (true);
+	}
+
 	void OnTriggerEnter(Collider collider)
 	{
 		if (collider.transform.tag == "Player") {
-			if (nextPoint) 
-				nextPoint.gameObject.SetActive (true);
-			transform.parent.gameObject.SetActive (false);
+			if (finishComponent)
+				finishComponent.BroadcastMessage (finishFunction);
 		}
 	}
 }

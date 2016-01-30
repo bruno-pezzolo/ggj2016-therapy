@@ -5,11 +5,15 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class DadStep2 : MonoBehaviour {
 
 	public AudioClip firstLine;
-	public AudioClip[] lines;
+	public AudioClip findLine;
+	public AudioClip lastLine;
+
+	public float lineDelay = 1.0f;
 
 	private bool scheduledLine = false;
 	private GameObject player;
 	private AudioSource audioSource;
+	private AudioClip currentAudio;
 
 	public delegate void AudioCallback();
 
@@ -20,8 +24,7 @@ public class DadStep2 : MonoBehaviour {
 		scheduledLine = true;
 		yield return new WaitForSeconds(delay);
 
-		int random = Random.Range(0,lines.Length);
-		audioSource.PlayOneShot(lines[random]);
+		audioSource.PlayOneShot(currentAudio);
 
 		scheduledLine = false;
 	}
@@ -64,27 +67,39 @@ public class DadStep2 : MonoBehaviour {
 	void Start () {
 		DisableAllPlayerControls ();
 		if (!firstLine) return;
+		currentAudio = firstLine;
 
 		PlaySoundWithCallback(firstLine, EnableRotationControls);
 	}
 
+	void Finish() {
+		this.gameObject.SetActive (false);
+	}
 
 	// Update is called once per frame
 	void Update () {
 		if ((!audioSource.isPlaying) && (!scheduledLine))
-			StartCoroutine (PlayLineWithDelay (0));
+			StartCoroutine (PlayLineWithDelay (lineDelay));
 
 		if (!isPlayerFacingMe) {
 			Vector3 dir = transform.position - player.transform.position;
 			float direction = Vector3.Dot (dir.normalized, player.transform.forward);
 
-			Debug.Log (direction);
 			if (1 - direction <= 0.001f) {
 				isPlayerFacingMe = true;
 				DisableAllPlayerControls ();
-				EnableVerticalControls();
-				Debug.Log ("Peakaboo");
+				audioSource.Stop ();
+				currentAudio = findLine;
+				PlaySoundWithCallback (findLine, EnableVerticalControls);
 			}
+		}
+	}
+
+	void OnTriggerEnter(Collider collider)
+	{
+		if (collider.transform.tag == "Player") {
+			audioSource.Stop ();
+			PlaySoundWithCallback (lastLine, Finish);
 		}
 	}
 

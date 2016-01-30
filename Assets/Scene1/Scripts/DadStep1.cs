@@ -6,6 +6,7 @@ public class DadStep1 : MonoBehaviour {
 
 	public AudioClip firstLine;
 	public AudioClip[] lines;
+	public AudioClip lastLine;
 
 	private bool scheduledLine = false;
 	private GameObject player;
@@ -13,7 +14,7 @@ public class DadStep1 : MonoBehaviour {
 
 	public delegate void AudioCallback();
 
-
+	public Transform nextPoint;
 
 	// Plays a random line
 	IEnumerator PlayLineWithDelay(float delay){
@@ -70,6 +71,22 @@ public class DadStep1 : MonoBehaviour {
 	void Update () {
 		if ((audioSource.isPlaying) || (scheduledLine)) return;
 		StartCoroutine (PlayLineWithDelay (5));
+	}
+
+	void ActivateNextPoint()
+	{
+		if (nextPoint) 
+			nextPoint.gameObject.SetActive (true);
+		this.gameObject.SetActive (false);
+	}
+
+	void OnTriggerEnter(Collider collider)
+	{
+		if (collider.transform.tag == "Player") {
+			audioSource.Stop ();
+			DisableAllPlayerControls ();
+			PlaySoundWithCallback (lastLine, ActivateNextPoint);
+		}
 	}
 
 }
