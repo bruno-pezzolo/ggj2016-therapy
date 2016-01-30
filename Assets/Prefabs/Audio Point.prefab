@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 404236}
-  - 114: {fileID: 11441010}
   m_Layer: 0
   m_Name: Audio Point
   m_TagString: Untagged
@@ -241,21 +240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPoint: {fileID: 0}
---- !u!114 &11441010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 133026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dadf0f3fb763483ca560089aea562ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstLine: {fileID: 8300000, guid: e3afe1c10efb54fac9974c2ff428bda6, type: 3}
-  lines:
-  - {fileID: 8300000, guid: 33ce2df5ea85f4ae3a0bc24451ecae19, type: 3}
-  - {fileID: 8300000, guid: d31cd1705382a46f696ab08c4eb72260, type: 3}
 --- !u!135 &13511524
 SphereCollider:
   m_ObjectHideFlags: 1
