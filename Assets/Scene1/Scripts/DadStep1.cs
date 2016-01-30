@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class DadStep1 : MonoBehaviour {
@@ -14,6 +15,8 @@ public class DadStep1 : MonoBehaviour {
 
 	public delegate void AudioCallback();
 
+	private AudioClip lastPlayedLine;
+
 	public Transform nextPoint;
 
 	// Plays a random line
@@ -21,8 +24,22 @@ public class DadStep1 : MonoBehaviour {
 		scheduledLine = true;
 		yield return new WaitForSeconds(delay);
 
-		int random = Random.Range(0,lines.Length);
-		audioSource.PlayOneShot(lines[random]);
+		if (lines.Length == 1) {
+			audioSource.PlayOneShot(lines[1]);
+		} 
+		else {
+			List<AudioClip> elegibleLines = new List<AudioClip>();
+			foreach (AudioClip clip in lines) {
+				if (!lastPlayedLine || lastPlayedLine != clip) {
+					elegibleLines.Add(clip);
+				}
+			}
+
+			int randomIndex = Random.Range(0,elegibleLines.Count);
+			AudioClip randomLine = elegibleLines[randomIndex];
+			lastPlayedLine = randomLine;
+			audioSource.PlayOneShot(randomLine);
+		}
 
 		scheduledLine = false;
 	}
@@ -70,6 +87,7 @@ public class DadStep1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if ((audioSource.isPlaying) || (scheduledLine)) return;
+		if (lines.Length == 0) return;
 		StartCoroutine (PlayLineWithDelay (5));
 	}
 
