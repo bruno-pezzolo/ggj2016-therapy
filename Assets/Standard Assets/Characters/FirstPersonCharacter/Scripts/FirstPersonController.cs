@@ -42,6 +42,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+		private float horizontalMultiplier = 1f;
+		private float verticalMultiplier   = 1f;
+		private bool  rotationEnabled      = true;
+
         // Use this for initialization
         private void Start()
         {
@@ -63,10 +67,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
             // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump)
-            {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-            }
+//            if (!m_Jump)
+//            {
+//                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+//            }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
@@ -204,8 +208,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void GetInput(out float speed)
         {
             // Read input
-            float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-            float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+            float horizontal = CrossPlatformInputManager.GetAxis("Horizontal") * horizontalMultiplier;
+            float vertical = CrossPlatformInputManager.GetAxis("Vertical") * verticalMultiplier;
 
             bool waswalking = m_IsWalking;
 
@@ -215,7 +219,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
 #endif
             // set the desired speed to be walking or running
-            speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+			speed = m_WalkSpeed;
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:
@@ -236,7 +240,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+			if (rotationEnabled)
+				m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
 
 
@@ -255,5 +260,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+		public void toggleHorizontalMovement(bool state)
+		{
+			horizontalMultiplier = state ? 1f : 0f;
+		}
+
+		public void toggleVerticalMovement(bool state)
+		{
+			verticalMultiplier = state ? 1f : 0f;
+		}
+
+		public void toggleRotation(bool state)
+		{
+			rotationEnabled = state;
+		}
     }
 }
