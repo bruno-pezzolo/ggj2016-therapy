@@ -32,9 +32,9 @@ public class CarCollisionScript : MonoBehaviour {
 	}
 
 	void DisableAllPlayerControls() {
-		player.GetComponent<FirstPersonController>().toggleRotation(false);
-		player.GetComponent<FirstPersonController>().toggleHorizontalMovement(false);
-		player.GetComponent<FirstPersonController>().toggleVerticalMovement(false);
+		player.GetComponent<FirstPersonController2>().toggleRotation(false);
+		player.GetComponent<FirstPersonController2>().toggleHorizontalMovement(false);
+		player.GetComponent<FirstPersonController2>().toggleVerticalMovement(false);
 	}
 
 	void OnTriggerEnter (Collider collider) {

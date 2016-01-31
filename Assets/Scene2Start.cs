@@ -10,7 +10,7 @@ public class Scene2Start : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player.GetComponent<FirstPersonController>().toggleVerticalMovement (false);
+		player.GetComponent<FirstPersonController2>().toggleVerticalMovement (false);
 	}
 	
 	// Update is called once per frame
