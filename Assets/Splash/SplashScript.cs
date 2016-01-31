@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class SplashScript : MonoBehaviour {
@@ -14,6 +15,13 @@ public class SplashScript : MonoBehaviour {
 	public float splashTime = 5.0f;
 
 	public delegate void DelayedInteraction();
+
+	public string nextSceneName;
+
+	void ActivateNextScene() {
+		if (nextSceneName != null)
+			SceneManager.LoadScene (nextSceneName);
+	}
 
 	void Awake() {
 		guiTex = GetComponent<GUITexture> ();
@@ -48,7 +56,7 @@ public class SplashScript : MonoBehaviour {
 		if (guiTex.color.a >= 0.95f) {
 			guiTex.color = Color.black;
 			sceneEnding = false;
-			Debug.Log ("Start Game");
+			ActivateNextScene ();
 		}
 	}
 
