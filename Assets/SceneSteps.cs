@@ -162,6 +162,10 @@ public class SceneSteps : MonoBehaviour {
 		
 			Transform car = Instantiate (carPrefab, new Vector3 (x, 20, carSpawn.z), Quaternion.identity) as Transform;
 
+			Vector3 position = car.transform.FindChild ("AudioSource").position;
+			position.x = car.position.x * 5;
+			car.transform.FindChild ("AudioSource").position = position;
+
 			car.parent = cars;
 
 			carSpawn.SetSpawned (true);
@@ -191,22 +195,22 @@ public class SceneSteps : MonoBehaviour {
 		yield return new WaitForSeconds(initialDelay);
 
 		// Shrink lines
-		for (int i = 0; i < lines1.Length; i++) {
-			AudioClip clip = lines1 [i];
-			shrinkAudioSource.PlayOneShot (clip);
-			yield return new WaitForSeconds(clip.length);
-			if (i == rainLineIndex) {
+//		for (int i = 0; i < lines1.Length; i++) {
+//			AudioClip clip = lines1 [i];
+//			shrinkAudioSource.PlayOneShot (clip);
+//			yield return new WaitForSeconds(clip.length);
+//			if (i == rainLineIndex) {
 				startRainSound ();
-			}
-			yield return new WaitForSeconds(lineDelays1[i]);
-		}
-
+//			}
+//			yield return new WaitForSeconds(lineDelays1[i]);
+//		}
+//
 		// Dad lines
-		for (int i = 0; i < lines2.Length; i++) {
-			AudioClip clip = lines2 [i];
-			passengerAudioSource.PlayOneShot (clip);
-			yield return new WaitForSeconds(clip.length + lineDelays2[i]);
-		}
+//		for (int i = 0; i < lines2.Length; i++) {
+//			AudioClip clip = lines2 [i];
+//			passengerAudioSource.PlayOneShot (clip);
+//			yield return new WaitForSeconds(clip.length + lineDelays2[i]);
+//		}
 
 		player.GetComponent<FirstPersonController>().toggleHorizontalMovement(true);
 
