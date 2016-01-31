@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerInteraction : MonoBehaviour {
@@ -11,8 +12,10 @@ public class PlayerInteraction : MonoBehaviour {
 	private AudioSource audioSource;
 
 	public AudioClip[] basicHints;
+	private AudioClip lastBasicHint;
 
 	public AudioClip[] closeHints;
+	private AudioClip lastCloseHint;
 
 	public bool closeToTarget = false;
 
@@ -60,16 +63,38 @@ public class PlayerInteraction : MonoBehaviour {
 		playingSongs--;
 	}
 
-	void PlayRandomAudioClip()
-	{
+	void PlayRandomAudioClip() {
 		if ((audioSource.isPlaying) || (!audioEnabled) || (playingSongs > 0)) return;
 
-		AudioClip[] audioList = closeToTarget ? closeHints : basicHints;
+		AudioClip clip;
 
-		int randomIndex = Random.Range (0, audioList.Length);
-		AudioClip audioClip = audioList [randomIndex];
-		PlayAudioClip(audioClip);
-		StartCoroutine (DelayedCallback (audioClip.length + audioLoopDelay, EnableNewSong));
+		AudioClip[] audioList = closeToTarget ? closeHints : basicHints;
+		if (audioList.Length == 1)
+			clip = audioList [0];
+		else {
+			List<AudioClip> elegibleClips = new List<AudioClip> ();
+			foreach (AudioClip aClip in audioList) {
+				if (closeToTarget) {
+					if (!lastCloseHint || lastCloseHint != aClip)
+						elegibleClips.Add (aClip);
+				}
+				else {
+					if (!lastBasicHint || lastBasicHint != aClip)
+						elegibleClips.Add (aClip);					
+				}
+			}
+
+			int randomIndex = Random.Range (0, audioList.Length);
+			AudioClip randomClip = audioList [randomIndex];
+			clip = randomClip;
+			if (closeToTarget)
+				lastCloseHint = clip;
+			else
+				lastBasicHint = clip;
+		}
+				
+		PlayAudioClip(clip);
+		StartCoroutine (DelayedCallback (clip.length + audioLoopDelay, EnableNewSong));
 	}
 
 	void PlayAudioClip(AudioClip clip)
