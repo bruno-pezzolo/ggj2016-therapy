@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 286cd2359b41546e8b38ffa18283d4bd, type: 3}
+  lastClip: {fileID: 8300000, guid: 9c469d7d46ee64c8089e9f25adc6794a, type: 3}
   dadSoundDelay: 3
 --- !u!1 &457546995
 GameObject:
@@ -362,7 +363,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2008330, guid: 264916e8552404b46bd3822090c3ff76, type: 2}
       propertyPath: m_CullingMask.m_Bits
-      value: 0
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 11411716, guid: 264916e8552404b46bd3822090c3ff76, type: 2}
       propertyPath: m_FootstepSounds.Array.data[0]

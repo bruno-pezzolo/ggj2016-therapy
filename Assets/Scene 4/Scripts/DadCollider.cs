@@ -5,8 +5,9 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class DadCollider : MonoBehaviour {
 
 	public AudioClip audioClip;
+	public AudioClip lastClip;
 
-	public float dadSoundDelay = 3.0f;
+	public float dadSoundDelay = 2.0f;
 
 	private AudioSource audioSource;
 
@@ -26,8 +27,12 @@ public class DadCollider : MonoBehaviour {
 		audioSource = transform.FindChild ("AudioSource").GetComponent<AudioSource> ();
 	}
 
+	void PlayEndCredits() {
+		audioSource.PlayOneShot (lastClip);
+	}
+
 	void EndGame() {
-		Debug.Log ("End Game");
+		StartCoroutine (DelayedCallback (2, PlayEndCredits)); 
 	}
 
 	void PlayDadSound()
