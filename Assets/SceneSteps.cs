@@ -209,23 +209,23 @@ public class SceneSteps : MonoBehaviour {
 
 		yield return new WaitForSeconds(initialDelay);
 
-		// Shrink lines
-		for (int i = 0; i < lines1.Length; i++) {
-			AudioClip clip = lines1 [i];
-			shrinkAudioSource.PlayOneShot (clip);
-			yield return new WaitForSeconds(clip.length);
-			if (i == rainLineIndex) {
-				startRainSound ();
-			}
-			yield return new WaitForSeconds(lineDelays1[i]);
-		}
-
-		// Dad lines
-		for (int i = 0; i < lines2.Length; i++) {
-			AudioClip clip = lines2 [i];
-			passengerAudioSource.PlayOneShot (clip);
-			yield return new WaitForSeconds(clip.length + lineDelays2[i]);
-		}
+//		// Shrink lines
+//		for (int i = 0; i < lines1.Length; i++) {
+//			AudioClip clip = lines1 [i];
+//			shrinkAudioSource.PlayOneShot (clip);
+//			yield return new WaitForSeconds(clip.length);
+//			if (i == rainLineIndex) {
+//				startRainSound ();
+//			}
+//			yield return new WaitForSeconds(lineDelays1[i]);
+//		}
+//
+//		// Dad lines
+//		for (int i = 0; i < lines2.Length; i++) {
+//			AudioClip clip = lines2 [i];
+//			passengerAudioSource.PlayOneShot (clip);
+//			yield return new WaitForSeconds(clip.length + lineDelays2[i]);
+//		}
 
 		player.GetComponent<FirstPersonController2>().toggleHorizontalMovement(true);
 
