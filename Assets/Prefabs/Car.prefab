@@ -226,7 +226,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0.1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 300
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
     speed: 0
     delay: 0
     line: {fileID: 0}
+    wasClose: 0
 --- !u!114 &11476392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,7 +433,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxDistance
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[0].time

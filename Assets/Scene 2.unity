@@ -158,7 +158,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2008330, guid: 264916e8552404b46bd3822090c3ff76, type: 2}
       propertyPath: m_CullingMask.m_Bits
-      value: 0
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 264916e8552404b46bd3822090c3ff76, type: 2}
@@ -359,8 +359,8 @@ MonoBehaviour:
   - 5
   rainLineIndex: 3
   lines2:
-  - {fileID: 8300000, guid: c2e4a5189217342cf9bd2d33dd250b9c, type: 3}
-  - {fileID: 8300000, guid: da1da835ff178491bb65bab9045cdf0d, type: 3}
+  - {fileID: 8300000, guid: d8a10f4325249484bba5aadf03492858, type: 3}
+  - {fileID: 8300000, guid: ba7f2855bfc504ae988aa0c5450678ee, type: 3}
   lineDelays2:
   - 2
   - 2
@@ -385,19 +385,19 @@ MonoBehaviour:
     wasClose: 0
   - x: 0
     z: 350
-    speed: 225
+    speed: 200
     delay: 3
     line: {fileID: 0}
     wasClose: 0
   - x: 0
     z: 500
-    speed: 250
+    speed: 200
     delay: 3
     line: {fileID: 0}
     wasClose: 0
   carPrefab: {fileID: 414506, guid: dd773e56bb44a4673baf58b76ceb565b, type: 2}
   passingLines:
-  - {fileID: 8300000, guid: 8eafc374b32ae43368e6044327dc7d38, type: 3}
+  - {fileID: 0}
   gameOverLines:
   - {fileID: 8300000, guid: 6dfa00642f7bb4ba590341d895f682c2, type: 3}
   finalCollisionAudio: {fileID: 8300000, guid: ecea0e24b232a4063828075c28045f19, type: 3}
@@ -520,7 +520,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a798431ba8a443c1b1566a4c5c146be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  proximitySound: {fileID: 8300000, guid: 8144e5db58bcb4548958a18bc5e9124a, type: 3}
+  proximitySounds:
+  - {fileID: 8300000, guid: 604c6277089b5454a834c47c55f4f7c3, type: 3}
+  - {fileID: 8300000, guid: 239104b08c546499598f42c6e454f6ca, type: 3}
+  - {fileID: 8300000, guid: f5346c78bd15f4cef9cfdfc076078509, type: 3}
+  - {fileID: 8300000, guid: 6979333e8dc2d4134b45559aafb69255, type: 3}
 --- !u!1 &1057647901
 GameObject:
   m_ObjectHideFlags: 0

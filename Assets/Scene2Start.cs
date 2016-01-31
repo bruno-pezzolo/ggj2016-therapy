@@ -6,7 +6,7 @@ public class Scene2Start : MonoBehaviour {
 
 	private GameObject player;
 
-	public AudioClip proximitySound;
+	public AudioClip[] proximitySounds;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +20,9 @@ public class Scene2Start : MonoBehaviour {
 		
 	void OnProximitySensorCollisionEnter (GameObject car) {
 		AudioSource passengerAudioSource = transform.FindChild ("Passenger Audio Source").GetComponent<AudioSource>();
+
+		int randomIndex = Random.Range (0, proximitySounds.Length);
+		AudioClip proximitySound = proximitySounds [randomIndex];
 		passengerAudioSource.PlayOneShot (proximitySound);
 
 		BondariesCollisionScript script = car.GetComponent<BondariesCollisionScript> ();

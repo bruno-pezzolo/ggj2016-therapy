@@ -42,6 +42,7 @@ public class SceneSteps : MonoBehaviour {
 	public int rainLineIndex;
 	public AudioClip[] lines2;
 	public float[] lineDelays2;
+	public AudioClip lastLine;
 	public CarSpawn[] carSpawns;
 	public Transform carPrefab;
 	public AudioClip[] passingLines;
@@ -95,6 +96,14 @@ public class SceneSteps : MonoBehaviour {
 		finished = true;
 		setEnabledPlayerControls (false);
 
+		yield return new WaitForSeconds (2);
+
+		AudioSource passengerAudioSource = player.transform.FindChild ("Passenger Audio Source").GetComponent<AudioSource>();
+		passengerAudioSource.volume = 1;
+		passengerAudioSource.PlayOneShot (lastLine);
+
+		yield return new WaitForSeconds (lastLine.length);
+
 		Vector3 playerPosition = player.transform.position;
 		Transform car = Instantiate (carPrefab, new Vector3 (playerPosition.x, 20, playerPosition.z + 750), Quaternion.identity) as Transform;			
 
@@ -142,7 +151,7 @@ public class SceneSteps : MonoBehaviour {
 		totalPassings++;
 
 		BondariesCollisionScript script = car.GetComponent<BondariesCollisionScript> ();
-		if (script.carSpawn.wasClose) {
+		if (script.carSpawn.wasClose && (Random.Range (0, 2) == 1)) {
 			AudioSource passengerAudioSource = player.transform.FindChild ("Passenger Audio Source").GetComponent<AudioSource>();
 
 			int randomIndex = Random.Range (0, passingLines.Length);
@@ -195,22 +204,22 @@ public class SceneSteps : MonoBehaviour {
 		yield return new WaitForSeconds(initialDelay);
 
 		// Shrink lines
-//		for (int i = 0; i < lines1.Length; i++) {
-//			AudioClip clip = lines1 [i];
-//			shrinkAudioSource.PlayOneShot (clip);
-//			yield return new WaitForSeconds(clip.length);
-//			if (i == rainLineIndex) {
+		for (int i = 0; i < lines1.Length; i++) {
+			AudioClip clip = lines1 [i];
+			shrinkAudioSource.PlayOneShot (clip);
+			yield return new WaitForSeconds(clip.length);
+			if (i == rainLineIndex) {
 				startRainSound ();
-//			}
-//			yield return new WaitForSeconds(lineDelays1[i]);
-//		}
-//
+			}
+			yield return new WaitForSeconds(lineDelays1[i]);
+		}
+
 		// Dad lines
-//		for (int i = 0; i < lines2.Length; i++) {
-//			AudioClip clip = lines2 [i];
-//			passengerAudioSource.PlayOneShot (clip);
-//			yield return new WaitForSeconds(clip.length + lineDelays2[i]);
-//		}
+		for (int i = 0; i < lines2.Length; i++) {
+			AudioClip clip = lines2 [i];
+			passengerAudioSource.PlayOneShot (clip);
+			yield return new WaitForSeconds(clip.length + lineDelays2[i]);
+		}
 
 		player.GetComponent<FirstPersonController>().toggleHorizontalMovement(true);
 
