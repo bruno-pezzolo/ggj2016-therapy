@@ -190,6 +190,7 @@ MonoBehaviour:
   delays:
   - 0.5
   - 0
+  nextSceneName: Scene 3 Before
 --- !u!82 &1358688447
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -19,20 +20,18 @@ public class DadStep3 : MonoBehaviour {
 
 	private AudioClip lastPlayedLine;
 
-	public Transform nextPoint;
+	public string nextSceneName;
 
-	void ActivateNextPoint()
-	{
-		if (nextPoint) 
-			nextPoint.gameObject.SetActive (true);
-		this.gameObject.SetActive (false);
+	void ActivateNextScene() {
+		if (nextSceneName != null)
+			SceneManager.LoadScene (nextSceneName);
 	}
 
 	public void waitDelay() {
 		if (!collided) 
 			StartCoroutine (DelayedCallback (2, soundLoop));
 		else 
-			PlaySoundWithCallback (lastLine, ActivateNextPoint);
+			PlaySoundWithCallback (lastLine, ActivateNextScene);
 	}
 
 	public void soundLoop() {
@@ -58,7 +57,7 @@ public class DadStep3 : MonoBehaviour {
 				StartCoroutine (DelayedCallback (clip.length, waitDelay));
 			} 
 			else 
-				PlaySoundWithCallback (lastLine, ActivateNextPoint);
+				PlaySoundWithCallback (lastLine, ActivateNextScene);
 		}
 	}
 
@@ -111,7 +110,7 @@ public class DadStep3 : MonoBehaviour {
 			collided = true;
 			if (!audioSource.isPlaying) {
 				brokeDelay = true;
-				PlaySoundWithCallback (lastLine, ActivateNextPoint);
+				PlaySoundWithCallback (lastLine, ActivateNextScene);
 			}
 		}
 	}
