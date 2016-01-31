@@ -79,13 +79,7 @@ public class DadStep1 : MonoBehaviour {
 		yield return new WaitForSeconds(time);
 		callback();
 	}
-
-	private void startLoop() {
-		EnableVerticalControls ();
-		soundLoop ();
-	}
-
-
+		
 	void Awake() {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		audioSource = transform.FindChild ("AudioSource").GetComponent<AudioSource>();
@@ -97,7 +91,8 @@ public class DadStep1 : MonoBehaviour {
 		DisableAllPlayerControls ();
 		if (!firstLine) return;
 		audioSource.PlayOneShot(firstLine);
-		StartCoroutine(DelayedCallback (firstLine.length + 2, startLoop));
+		StartCoroutine(DelayedCallback (firstLine.length, EnableVerticalControls));
+		StartCoroutine(DelayedCallback (firstLine.length + 2, soundLoop));
 	}
 
 	// Update is called once per frame
