@@ -10,6 +10,8 @@ public class DadStep3 : MonoBehaviour {
 	public AudioClip lastLine;
 
 	private bool collided = false;
+	private bool brokeDelay = false;
+
 	private GameObject player;
 	private AudioSource audioSource;
 
@@ -34,28 +36,30 @@ public class DadStep3 : MonoBehaviour {
 	}
 
 	public void soundLoop() {
-		if (!collided) {
-			AudioClip clip;
-			if (lines.Length == 1) {
-				clip = lines [1];
-			} else {
-				List<AudioClip> elegibleLines = new List<AudioClip> ();
-				foreach (AudioClip aClip in lines) {
-					if (!lastPlayedLine || lastPlayedLine != aClip) {
-						elegibleLines.Add (aClip);
+		if (!brokeDelay) {
+			if (!collided) {
+				AudioClip clip;
+				if (lines.Length == 1) {
+					clip = lines [1];
+				} else {
+					List<AudioClip> elegibleLines = new List<AudioClip> ();
+					foreach (AudioClip aClip in lines) {
+						if (!lastPlayedLine || lastPlayedLine != aClip) {
+							elegibleLines.Add (aClip);
+						}
 					}
+					int randomIndex = Random.Range (0, elegibleLines.Count);
+					AudioClip randomLine = elegibleLines [randomIndex];
+					clip = randomLine;
 				}
-				int randomIndex = Random.Range (0, elegibleLines.Count);
-				AudioClip randomLine = elegibleLines [randomIndex];
-				clip = randomLine;
-			}
 
-			lastPlayedLine = clip;
-			audioSource.PlayOneShot (clip);
-			StartCoroutine (DelayedCallback (clip.length, waitDelay));
-		} 
-		else 
-			PlaySoundWithCallback (lastLine, ActivateNextPoint);
+				lastPlayedLine = clip;
+				audioSource.PlayOneShot (clip);
+				StartCoroutine (DelayedCallback (clip.length, waitDelay));
+			} 
+			else 
+				PlaySoundWithCallback (lastLine, ActivateNextPoint);
+		}
 	}
 
 	void EnableVerticalControls() {
@@ -104,7 +108,11 @@ public class DadStep3 : MonoBehaviour {
 	void OnTriggerEnter(Collider collider) {
 		if (collider.transform.tag == "Player") {
 			DisableAllPlayerControls ();
-			collided = true;					
+			collided = true;
+			if (!audioSource.isPlaying) {
+				brokeDelay = true;
+				PlaySoundWithCallback (lastLine, ActivateNextPoint);
+			}
 		}
 	}
 
