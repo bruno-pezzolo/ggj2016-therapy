@@ -264,7 +264,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8402a9152e0a24491bb5a5bc39a7abdc, type: 3}
   - {fileID: 8300000, guid: 66176141be80644598b8e9d5174a7b91, type: 3}
   delays:
-  - 1.5
-  - 0
+  - 0.5
+  - 0.75
   - 1
   - 1
