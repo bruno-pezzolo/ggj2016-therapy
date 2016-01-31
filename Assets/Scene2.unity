@@ -324,6 +324,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 850548305}
   - 114: {fileID: 850548304}
+  - 114: {fileID: 850548306}
   m_Layer: 0
   m_Name: SceneHandler
   m_TagString: Untagged
@@ -366,18 +367,39 @@ MonoBehaviour:
   - x: -20
     z: 0
     speed: 150
+    delay: 3
     line: {fileID: 0}
-  - x: 20
-    z: 0
-    speed: 150
+    wasClose: 0
+  - x: 0
+    z: 100
+    speed: 175
+    delay: 3
     line: {fileID: 0}
-  - x: -20
-    z: 0
-    speed: 150
+    wasClose: 0
+  - x: 0
+    z: 200
+    speed: 200
+    delay: 3
     line: {fileID: 0}
+    wasClose: 0
+  - x: 0
+    z: 350
+    speed: 225
+    delay: 3
+    line: {fileID: 0}
+    wasClose: 0
+  - x: 0
+    z: 500
+    speed: 250
+    delay: 3
+    line: {fileID: 0}
+    wasClose: 0
   carPrefab: {fileID: 414506, guid: dd773e56bb44a4673baf58b76ceb565b, type: 2}
+  passingLines:
+  - {fileID: 8300000, guid: 8eafc374b32ae43368e6044327dc7d38, type: 3}
   gameOverLines:
   - {fileID: 8300000, guid: 6dfa00642f7bb4ba590341d895f682c2, type: 3}
+  finalCollisionAudio: {fileID: 8300000, guid: ecea0e24b232a4063828075c28045f19, type: 3}
 --- !u!4 &850548305
 Transform:
   m_ObjectHideFlags: 0
@@ -390,6 +412,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &850548306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 850548303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6809f6e9231d486aae810649dd43efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  proximityAudioClip: {fileID: 8300000, guid: b1169ed62c65544faaca64844be13b6e, type: 3}
 --- !u!1 &1033804356
 GameObject:
   m_ObjectHideFlags: 0

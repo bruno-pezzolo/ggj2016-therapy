@@ -23,7 +23,7 @@ public class CarCollisionScript : MonoBehaviour {
 
 	private IEnumerator DelayedCallback(float time) {
 		yield return new WaitForSeconds(time);
-		collisionDelegate.BroadcastMessage ("OnCarCollisionEnter");
+		collisionDelegate.BroadcastMessage ("OnCarCollisionFinished");
 	}
 
 	public void PlaySoundWithCallback(AudioClip clip) {
@@ -37,8 +37,10 @@ public class CarCollisionScript : MonoBehaviour {
 		player.GetComponent<FirstPersonController>().toggleVerticalMovement(false);
 	}
 
-	void OnTriggerEnter (Collider collider) {		
+	void OnTriggerEnter (Collider collider) {
 		if (collider.transform.tag == "Player") {
+			collisionDelegate.BroadcastMessage ("OnCarCollisionEnter", this.gameObject);
+
 			audioSource.Stop ();
 			DisableAllPlayerControls ();
 			PlaySoundWithCallback (collisionSound);

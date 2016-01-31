@@ -34,7 +34,7 @@ public class CarInteractionScript : MonoBehaviour {
 
 	}
 		
-	void OnCarCollisionEnter () {
+	void OnCarCollisionFinished () {
 		StartCoroutine (GameOverAudioCoroutine());
 	}
 

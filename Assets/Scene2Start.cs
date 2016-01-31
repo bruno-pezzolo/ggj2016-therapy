@@ -18,9 +18,12 @@ public class Scene2Start : MonoBehaviour {
 	
 	}
 		
-	void OnProximitySensorCollisionEnter () {
+	void OnProximitySensorCollisionEnter (GameObject car) {
 		AudioSource passengerAudioSource = transform.FindChild ("Passenger Audio Source").GetComponent<AudioSource>();
 		passengerAudioSource.PlayOneShot (proximitySound);
+
+		BondariesCollisionScript script = car.GetComponent<BondariesCollisionScript> ();
+		script.carSpawn.wasClose = true;
 	}
 
 	void Awake() {

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProximitySensorScript : MonoBehaviour {
+public class CarPassingScript : MonoBehaviour {
 
-	public GameObject collisionDelegate;
+	public Component collisionDelegate;
 
 	// Use this for initialization
 	void Start () {
@@ -12,13 +12,13 @@ public class ProximitySensorScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+	
 	}
 
 	void OnTriggerEnter (Collider collider) {
 		if (collider.transform.tag == "Player") {
 			if (collisionDelegate != null) {
-				collisionDelegate.BroadcastMessage ("OnProximitySensorCollisionEnter", this.transform.parent.gameObject);
+				collisionDelegate.BroadcastMessage ("OnCarPassingSensorCollisionEnter", this.transform.parent.gameObject);
 			}
 		}
 	}
