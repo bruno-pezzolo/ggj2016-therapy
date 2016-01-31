@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeSpeed: 1
   splashTime: 5
+  nextSceneName: Scene 1 Before
 --- !u!131 &590672388
 GUITexture:
   m_ObjectHideFlags: 0
