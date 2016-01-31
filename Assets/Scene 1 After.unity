@@ -188,7 +188,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 15c9e668cf9b9425c99a2794f30cacca, type: 3}
   - {fileID: 8300000, guid: 8a915976b507d4e58aa7290750fd17cc, type: 3}
   delays:
-  - 0
+  - 0.75
   - 0
 --- !u!82 &1358688447
 AudioSource:
