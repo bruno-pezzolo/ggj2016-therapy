@@ -640,20 +640,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLine: {fileID: 0}
-  lines: []
-  lastLine: {fileID: 0}
-  nextPoint: {fileID: 0}
---- !u!114 &1380489498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1380489496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08bde520189ba4ab1a5e41e2ec19b950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   lines:
   - {fileID: 8300000, guid: 33ce2df5ea85f4ae3a0bc24451ecae19, type: 3}
   - {fileID: 8300000, guid: d31cd1705382a46f696ab08c4eb72260, type: 3}
@@ -877,6 +863,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 120802, guid: f28d20782a3564e31a91b558c0cd3c30, type: 2}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13507658, guid: f28d20782a3564e31a91b558c0cd3c30, type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
