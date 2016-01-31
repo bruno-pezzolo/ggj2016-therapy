@@ -5,6 +5,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class DadStep2 : MonoBehaviour {
 
+	public AudioClip firstLine;
 	public AudioClip[] lines;
 	private AudioClip lastPlayedLine;
 
@@ -92,9 +93,11 @@ public class DadStep2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (firstLine)
+			audioSource.PlayOneShot(firstLine);
 		DisableAllPlayerControls ();
 		EnableRotationControls();
-		soundLoop ();
+		StartCoroutine (DelayedCallback (2, soundLoop));
 	}
 
 	// Update is called once per frame

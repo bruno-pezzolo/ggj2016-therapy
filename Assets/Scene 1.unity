@@ -312,11 +312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dadf0f3fb763483ca560089aea562ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstLine: {fileID: 8300000, guid: e3afe1c10efb54fac9974c2ff428bda6, type: 3}
+  firstLine: {fileID: 8300000, guid: f8458bed8891e4e51b67d91816bcf035, type: 3}
   lines:
-  - {fileID: 8300000, guid: f17f6ad4b8fb34282bab9cba6f9efdf1, type: 3}
-  - {fileID: 8300000, guid: d31cd1705382a46f696ab08c4eb72260, type: 3}
-  lastLine: {fileID: 8300000, guid: 574cf8100054342b1b1f28812f9ddd87, type: 3}
+  - {fileID: 8300000, guid: 9db949624d05a48d0a79b536a15c4ae8, type: 3}
+  - {fileID: 8300000, guid: 9de02bc42e3954dc6bdeec375c8fd0c9, type: 3}
+  lastLine: {fileID: 8300000, guid: d69227c0fd74a41168f5f18ef8c99188, type: 3}
   nextPoint: {fileID: 1281679482}
 --- !u!4 &972571870 stripped
 Transform:
@@ -566,9 +566,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bde520189ba4ab1a5e41e2ec19b950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstLine: {fileID: 8300000, guid: 8907691b0d34643f28df4ff2c99573de, type: 3}
   lines:
-  - {fileID: 8300000, guid: 06e5ad5b89332407ab77e8af2a260519, type: 3}
-  lastLine: {fileID: 8300000, guid: 8d93c9c1ec737467b99e4779c312b5b3, type: 3}
+  - {fileID: 8300000, guid: 7a34826574791428ebdb40043a639679, type: 3}
+  lastLine: {fileID: 8300000, guid: 0dc84aba2affb425f865662896d2988d, type: 3}
   nextPoint: {fileID: 1380489495}
 --- !u!1001 &1380489494
 Prefab:
@@ -641,9 +642,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstLine: {fileID: 0}
   lines:
-  - {fileID: 8300000, guid: 33ce2df5ea85f4ae3a0bc24451ecae19, type: 3}
-  - {fileID: 8300000, guid: d31cd1705382a46f696ab08c4eb72260, type: 3}
-  lastLine: {fileID: 8300000, guid: f2a827276a603453bbba2518dd627885, type: 3}
+  - {fileID: 8300000, guid: 9de02bc42e3954dc6bdeec375c8fd0c9, type: 3}
+  - {fileID: 8300000, guid: 9db949624d05a48d0a79b536a15c4ae8, type: 3}
+  lastLine: {fileID: 8300000, guid: baa4392ceda8d4a5989ed533854faff8, type: 3}
   nextSceneName: Scene 1 After
 --- !u!1001 &1398340259
 Prefab:
@@ -740,6 +741,18 @@ Prefab:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_FootstepSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dc3ccd499009b425f8b16eec4cbb016b, type: 3}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_FootstepSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dc3ccd499009b425f8b16eec4cbb016b, type: 3}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_LandSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d79e189365ad4a92a7e635c9325848c, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
