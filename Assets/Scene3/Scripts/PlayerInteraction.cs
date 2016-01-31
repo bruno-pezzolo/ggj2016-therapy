@@ -24,6 +24,8 @@ public class PlayerInteraction : MonoBehaviour {
 
 	public float distanceToInteract = 3f;
 
+	private InteractivePoint currentInteractivePoint;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -42,6 +44,8 @@ public class PlayerInteraction : MonoBehaviour {
 	void EnablePlayer()
 	{
 		TogglePlayerMovement (true, true, true);
+		currentInteractivePoint.gameObject.SetActive (false);
+		currentInteractivePoint = null;
 		StartCoroutine (DelayedCallback (audioLoopDelay, EnableNewSong));
 	}
 
@@ -94,6 +98,7 @@ public class PlayerInteraction : MonoBehaviour {
 					if (Input.GetKeyDown (KeyCode.Space)) {
 						DisablePlayer();
 						interactivePoint.StopPoint ();
+						currentInteractivePoint = interactivePoint;
 						PlayAudioClip (interactivePoint.audioClip);
 						StartCoroutine (DelayedCallback (interactivePoint.audioClip.length, EnablePlayer));
 					}
