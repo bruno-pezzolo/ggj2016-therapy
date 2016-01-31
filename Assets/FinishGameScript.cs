@@ -18,6 +18,8 @@ public class FinishGameScript : MonoBehaviour {
 
 	void OnProximitySensorCollisionEnter (GameObject car) {
 		AudioSource carAudioSource = car.transform.FindChild ("AudioSource").GetComponent<AudioSource> ();
+		carAudioSource.dopplerLevel = 0.0f;
+		carAudioSource.maxDistance = 1000;
 		carAudioSource.PlayOneShot (proximityAudioClip);
 	}
 }

@@ -29,6 +29,7 @@ public class SceneSteps : MonoBehaviour {
 
 	private GameObject player;
 	private AudioSource rainAudioSource;
+	private AudioSource ambienceAudioSource;
 	private float rainInitialTime;
 	private bool fadeInRain = false;
 	private int totalPassings = 0;
@@ -40,6 +41,7 @@ public class SceneSteps : MonoBehaviour {
 	public AudioClip[] lines1;
 	public float[] lineDelays1;
 	public int rainLineIndex;
+	public int ambienceLineIndex;
 	public AudioClip[] lines2;
 	public float[] lineDelays2;
 	public AudioClip lastLine;
@@ -70,17 +72,41 @@ public class SceneSteps : MonoBehaviour {
 		float initialFadeOutVolume = rainAudioSource.volume;
 
 		while (rainAudioSource.volume > 0.0f) {
-			rainAudioSource.volume = initialFadeOutVolume - 0.01f * (Time.fixedTime - initialFadeOutTime);
-			yield return new WaitForSeconds (1);
+			rainAudioSource.volume = initialFadeOutVolume - 0.1f * (Time.fixedTime - initialFadeOutTime);
+			yield return new WaitForSeconds (0.1f);
 		}
 		rainAudioSource.volume = 0.0f;
 	}
 
+	IEnumerator FadeAmbienceIn() {		
+		float initialFadeTime = Time.fixedTime;
+		float initialFadeVolume = 0;
+
+		while (ambienceAudioSource.volume < 0.05f) {
+			rainAudioSource.volume = initialFadeVolume - 0.1f * (Time.fixedTime - initialFadeVolume);
+			yield return new WaitForSeconds (0.1f);
+		}
+		ambienceAudioSource.volume = 0.05f;
+	}
+
+	IEnumerator FadeAmbienceOut () {		
+		float initialFadeTime = Time.fixedTime;
+		float initialFadeVolume = ambienceAudioSource.volume;
+
+		while (ambienceAudioSource.volume > 0.0f) {
+			ambienceAudioSource.volume = initialFadeVolume + 0.1f * (Time.fixedTime - initialFadeVolume);
+			yield return new WaitForSeconds (0.1f);
+		}
+		rainAudioSource.volume = 0.0f;
+	}
 
 	IEnumerator EndGameCoroutine () {
 		while (cars.childCount > 0) {
 			yield return null;
 		}
+
+		FadeRainOut ();
+		FadeAmbienceOut ();
 
 		yield return new WaitForSeconds (2);
 
@@ -118,6 +144,12 @@ public class SceneSteps : MonoBehaviour {
 		carCollisionScript.collisionDelegate = this;
 
 		Transform proximitySensor = car.Find("ProximitySensor");
+
+		BoxCollider sensorScaleCollider = proximitySensor.transform.GetComponent<BoxCollider> ();
+		Vector3 colliderSize = sensorScaleCollider.size;
+		colliderSize.z = 2000;
+		sensorScaleCollider.size = colliderSize;
+
 		proximitySensor.GetComponent<ProximitySensorScript> ().collisionDelegate = this.gameObject;
 
 		yield return null;
@@ -217,6 +249,10 @@ public class SceneSteps : MonoBehaviour {
 			if (i == rainLineIndex) {
 				startRainSound ();
 			}
+			if (i == ambienceLineIndex) {
+				ambienceAudioSource.Play ();
+				FadeAmbienceIn ();
+			}
 			yield return new WaitForSeconds(lineDelays1[i]);
 		}
 
@@ -254,6 +290,7 @@ public class SceneSteps : MonoBehaviour {
 	void Awake() {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		rainAudioSource = player.transform.FindChild ("Rain Audio Source").GetComponent<AudioSource>();
+		ambienceAudioSource = player.transform.FindChild ("Ambience Audio Source").GetComponent<AudioSource>();
 	}
 
 }
