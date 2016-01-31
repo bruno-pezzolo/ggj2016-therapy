@@ -58,9 +58,9 @@ public class SceneSteps : MonoBehaviour {
 	}
 
 	void setEnabledPlayerControls(bool enabled) {
-		player.GetComponent<FirstPersonController>().toggleRotation(enabled);
-		player.GetComponent<FirstPersonController>().toggleHorizontalMovement(enabled);
-		player.GetComponent<FirstPersonController>().toggleVerticalMovement(enabled);
+		player.GetComponent<FirstPersonController2>().toggleRotation(enabled);
+		player.GetComponent<FirstPersonController2>().toggleHorizontalMovement(enabled);
+		player.GetComponent<FirstPersonController2>().toggleVerticalMovement(enabled);
 	}
 
 	IEnumerator FadeRainOut() {
@@ -227,7 +227,7 @@ public class SceneSteps : MonoBehaviour {
 //			yield return new WaitForSeconds(clip.length + lineDelays2[i]);
 //		}
 
-		player.GetComponent<FirstPersonController>().toggleHorizontalMovement(true);
+		player.GetComponent<FirstPersonController2>().toggleHorizontalMovement(true);
 
 		yield return StartCoroutine (CarSpawnIterator ());
 
