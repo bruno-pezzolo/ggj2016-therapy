@@ -11,7 +11,6 @@ public class Dialogue : MonoBehaviour {
 
 	public float[] delays;
 
-
 	private IEnumerator DelayedCallback(float time, AudioCallback callback) {
 		yield return new WaitForSeconds(time);
 		callback();
@@ -21,13 +20,12 @@ public class Dialogue : MonoBehaviour {
 		audioSource.PlayOneShot(lines[lineIterator]);
 		lineIterator++; 
 		if (lineIterator < lines.Length) {
-			float duration = lines [lineIterator].length;
+			float duration = lines [lineIterator - 1].length;
 			float delay = delays [lineIterator - 1];
 			StartCoroutine (DelayedCallback (duration + delay, PlaySoundWithCallback));
 		}
 	}
-
-
+		
 	void Awake() {
 		audioSource = GetComponent<AudioSource> ();
 	}
