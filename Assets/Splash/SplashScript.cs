@@ -10,9 +10,11 @@ public class SplashScript : MonoBehaviour {
 
 	private bool sceneEnding = false;
 
+	public AudioClip headphonesAudio;
+
 	public float fadeSpeed = 1.0f;
 
-	public float splashTime = 5.0f;
+	public float splashTime = 2.0f;
 
 	public delegate void DelayedInteraction();
 
@@ -53,10 +55,11 @@ public class SplashScript : MonoBehaviour {
 	void EndScene()
 	{
 		guiTex.color = Color.Lerp (guiTex.color, Color.black, fadeSpeed * Time.deltaTime);
-		if (guiTex.color.a >= 0.95f) {
+		if (guiTex.color.a >= 0.80f) {
 			guiTex.color = Color.black;
 			sceneEnding = false;
-			ActivateNextScene ();
+			GetComponent<AudioSource> ().PlayOneShot (headphonesAudio);
+			StartCoroutine(DelayedCallback(headphonesAudio.length + 2.0f, ActivateNextScene));
 		}
 	}
 

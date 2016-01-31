@@ -26,6 +26,8 @@ public class PlayerInteraction : MonoBehaviour {
 
 	private InteractivePoint currentInteractivePoint;
 
+	private bool playerEnabled = true;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -46,6 +48,7 @@ public class PlayerInteraction : MonoBehaviour {
 		TogglePlayerMovement (true, true, true);
 		currentInteractivePoint.gameObject.SetActive (false);
 		currentInteractivePoint = null;
+		playerEnabled = true;
 		StartCoroutine (DelayedCallback (audioLoopDelay, EnableNewSong));
 	}
 
@@ -53,6 +56,7 @@ public class PlayerInteraction : MonoBehaviour {
 	{
 		
 		TogglePlayerMovement (false, false, false);
+		playerEnabled = false;
 	}
 
 	void EnableNewSong()
@@ -93,9 +97,10 @@ public class PlayerInteraction : MonoBehaviour {
 			Debug.DrawLine (transform.position, lineHit.point, Color.cyan);
 			if (lineHit.collider.tag == "InteractiveAudioPoint") {
 				InteractivePoint interactivePoint = lineHit.collider.GetComponent<InteractivePoint> ();
-				if (interactivePoint.enabled) {
+				if (interactivePoint.enabled && playerEnabled) {
 					closeToTarget = true;
-					if (Input.GetKeyDown (KeyCode.Space)) {
+					if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return) ||
+						Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
 						DisablePlayer();
 						interactivePoint.StopPoint ();
 						currentInteractivePoint = interactivePoint;
