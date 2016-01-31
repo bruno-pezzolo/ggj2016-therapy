@@ -363,7 +363,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2008330, guid: 264916e8552404b46bd3822090c3ff76, type: 2}
       propertyPath: m_CullingMask.m_Bits
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11411716, guid: 264916e8552404b46bd3822090c3ff76, type: 2}
       propertyPath: m_FootstepSounds.Array.data[0]
