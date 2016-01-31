@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
-  - Player
   - InteractiveAudioPoint
   layers:
   - Default
