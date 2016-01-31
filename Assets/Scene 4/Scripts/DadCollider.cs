@@ -6,6 +6,8 @@ public class DadCollider : MonoBehaviour {
 
 	public AudioClip audioClip;
 
+	public float dadSoundDelay = 3.0f;
+
 	private AudioSource audioSource;
 
 	public delegate void AudioCallback();
@@ -28,6 +30,12 @@ public class DadCollider : MonoBehaviour {
 		Debug.Log ("End Game");
 	}
 
+	void PlayDadSound()
+	{
+		audioSource.PlayOneShot (audioClip);
+		StartCoroutine(DelayedCallback (audioClip.length, EndGame));
+	}
+
 	void OnTriggerEnter(Collider collider)
 	{
 		if (collider.gameObject.tag == "Player") {
@@ -36,8 +44,7 @@ public class DadCollider : MonoBehaviour {
 			playerControl.toggleVerticalMovement (false);
 			playerControl.toggleRotation (false);
 			audioSource.Stop ();
-			audioSource.PlayOneShot (audioClip);
-			StartCoroutine(DelayedCallback (audioClip.length, EndGame));
+			StartCoroutine (DelayedCallback (dadSoundDelay, PlayDadSound));
 		}
 	}
 
