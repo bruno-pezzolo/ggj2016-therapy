@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/SampleScenes/Scenes/AircraftPropeller4Axis.unity
   - enabled: 0
     path: Assets/SampleScenes/Scenes/AircraftPropellerAI.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/SampleScenes/Scenes/Car.unity
   - enabled: 0
     path: Assets/SampleScenes/Scenes/CarAIWaypointBased.unity

@@ -26,8 +26,6 @@ public class PointCollider : MonoBehaviour {
 	void OnTriggerEnter(Collider collider)
 	{
 		if (collider.transform.tag == "Player") {
-			if (finishComponent)
-				finishComponent.BroadcastMessage (finishFunction);
 		}
 	}
 }
