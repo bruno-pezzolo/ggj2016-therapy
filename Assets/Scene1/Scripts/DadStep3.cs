@@ -3,41 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class DadStep2 : MonoBehaviour {
+public class DadStep3 : MonoBehaviour {
 
+	public AudioClip firstLine;
 	public AudioClip[] lines;
-	private AudioClip lastPlayedLine;
-
 	public AudioClip lastLine;
 
+	private bool collided = false;
 	private GameObject player;
 	private AudioSource audioSource;
 
-	public Transform nextPoint;
-
 	public delegate void AudioCallback();
 
-	private bool isPlayerFacingMe = false;
+	private AudioClip lastPlayedLine;
 
+	public Transform nextPoint;
 
-	void ActivateNextPoint() {
+	void ActivateNextPoint()
+	{
 		if (nextPoint) 
 			nextPoint.gameObject.SetActive (true);
 		this.gameObject.SetActive (false);
 	}
 
 	public void waitDelay() {
-		if (!isPlayerFacingMe) 
+		if (!collided) 
 			StartCoroutine (DelayedCallback (2, soundLoop));
 		else 
 			PlaySoundWithCallback (lastLine, ActivateNextPoint);
 	}
 
 	public void soundLoop() {
-		if (!isPlayerFacingMe) {
+		if (!collided) {
 			AudioClip clip;
 			if (lines.Length == 1) {
-				clip = lines [0];
+				clip = lines [1];
 			} else {
 				List<AudioClip> elegibleLines = new List<AudioClip> ();
 				foreach (AudioClip aClip in lines) {
@@ -62,21 +62,18 @@ public class DadStep2 : MonoBehaviour {
 		player.GetComponent<FirstPersonController>().toggleVerticalMovement(true);
 	}
 
-	void EnableRotationControls() {
-		player.GetComponent<FirstPersonController>().toggleRotation(true);
-	}
-
 	void DisableAllPlayerControls() {
 		player.GetComponent<FirstPersonController>().toggleRotation(false);
 		player.GetComponent<FirstPersonController>().toggleHorizontalMovement(false);
 		player.GetComponent<FirstPersonController>().toggleVerticalMovement(false);
 	}
 
+
 	public void PlaySoundWithCallback(AudioClip clip, AudioCallback callback) {
 		audioSource.PlayOneShot(clip);
 		StartCoroutine(DelayedCallback(clip.length, callback));
 	}
-		
+
 	private IEnumerator DelayedCallback(float time, AudioCallback callback) {
 		yield return new WaitForSeconds(time);
 		callback();
@@ -87,23 +84,28 @@ public class DadStep2 : MonoBehaviour {
 		audioSource = transform.FindChild ("AudioSource").GetComponent<AudioSource>();
 	}
 
+
 	// Use this for initialization
 	void Start () {
-		DisableAllPlayerControls ();
-		EnableRotationControls();
-		soundLoop ();
+		if (firstLine) {
+			audioSource.PlayOneShot (firstLine);
+			StartCoroutine (DelayedCallback (firstLine.length + 2, soundLoop));
+		} 
+		else {
+			StartCoroutine (DelayedCallback (2, soundLoop));
+			EnableVerticalControls ();
+		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (!isPlayerFacingMe) {
-			Vector3 dir = transform.position - player.transform.position;
-			float direction = Vector3.Dot (dir.normalized, player.transform.forward);
+	}
 
-			if (1 - direction <= 0.001f) {
-				DisableAllPlayerControls ();
-				isPlayerFacingMe = true;
-			}
+	void OnTriggerEnter(Collider collider) {
+		if (collider.transform.tag == "Player") {
+			DisableAllPlayerControls ();
+			collided = true;					
 		}
 	}
+
 }

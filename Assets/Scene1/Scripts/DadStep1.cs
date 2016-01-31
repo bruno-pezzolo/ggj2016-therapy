@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class DadStep1 : MonoBehaviour {
@@ -8,25 +9,55 @@ public class DadStep1 : MonoBehaviour {
 	public AudioClip[] lines;
 	public AudioClip lastLine;
 
-	private bool scheduledLine = false;
+
+	private bool collided = false;
 	private GameObject player;
 	private AudioSource audioSource;
 
 	public delegate void AudioCallback();
 
+	private AudioClip lastPlayedLine;
+
 	public Transform nextPoint;
 
-	// Plays a random line
-	IEnumerator PlayLineWithDelay(float delay){
-		scheduledLine = true;
-		yield return new WaitForSeconds(delay);
-
-		int random = Random.Range(0,lines.Length);
-		audioSource.PlayOneShot(lines[random]);
-
-		scheduledLine = false;
+	void ActivateNextPoint()
+	{
+		if (nextPoint) 
+			nextPoint.gameObject.SetActive (true);
+		this.gameObject.SetActive (false);
 	}
 
+	public void waitDelay() {
+		if (!collided) 
+			StartCoroutine (DelayedCallback (2, soundLoop));
+		else 
+			PlaySoundWithCallback (lastLine, ActivateNextPoint);
+	}
+	
+	public void soundLoop() {
+		if (!collided) {
+			AudioClip clip;
+			if (lines.Length == 1) {
+				clip = lines [1];
+			} else {
+				List<AudioClip> elegibleLines = new List<AudioClip> ();
+				foreach (AudioClip aClip in lines) {
+					if (!lastPlayedLine || lastPlayedLine != aClip) {
+						elegibleLines.Add (aClip);
+					}
+				}
+				int randomIndex = Random.Range (0, elegibleLines.Count);
+				AudioClip randomLine = elegibleLines [randomIndex];
+				clip = randomLine;
+			}
+
+			lastPlayedLine = clip;
+			audioSource.PlayOneShot (clip);
+			StartCoroutine (DelayedCallback (clip.length, waitDelay));
+		} 
+		else 
+			PlaySoundWithCallback (lastLine, ActivateNextPoint);
+	}
 
 	void EnableVerticalControls() {
 		player.GetComponent<FirstPersonController>().toggleVerticalMovement(true);
@@ -44,13 +75,11 @@ public class DadStep1 : MonoBehaviour {
 		StartCoroutine(DelayedCallback(clip.length, callback));
 	}
 
-
 	private IEnumerator DelayedCallback(float time, AudioCallback callback) {
 		yield return new WaitForSeconds(time);
 		callback();
 	}
-
-
+		
 	void Awake() {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		audioSource = transform.FindChild ("AudioSource").GetComponent<AudioSource>();
@@ -61,31 +90,19 @@ public class DadStep1 : MonoBehaviour {
 	void Start () {
 		DisableAllPlayerControls ();
 		if (!firstLine) return;
-		//		GetComponent<AudioSource>().PlayOneShot(firstLine);
-
-		PlaySoundWithCallback(firstLine, EnableVerticalControls);
+		audioSource.PlayOneShot(firstLine);
+		StartCoroutine(DelayedCallback (firstLine.length, EnableVerticalControls));
+		StartCoroutine(DelayedCallback (firstLine.length + 2, soundLoop));
 	}
-
 
 	// Update is called once per frame
 	void Update () {
-		if ((audioSource.isPlaying) || (scheduledLine)) return;
-		StartCoroutine (PlayLineWithDelay (5));
 	}
 
-	void ActivateNextPoint()
-	{
-		if (nextPoint) 
-			nextPoint.gameObject.SetActive (true);
-		this.gameObject.SetActive (false);
-	}
-
-	void OnTriggerEnter(Collider collider)
-	{
+	void OnTriggerEnter(Collider collider) {
 		if (collider.transform.tag == "Player") {
-			audioSource.Stop ();
 			DisableAllPlayerControls ();
-			PlaySoundWithCallback (lastLine, ActivateNextPoint);
+			collided = true;					
 		}
 	}
 
