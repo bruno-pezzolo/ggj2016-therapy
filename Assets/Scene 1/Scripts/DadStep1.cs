@@ -40,7 +40,7 @@ public class DadStep1 : MonoBehaviour {
 			if (!collided) {
 				AudioClip clip;
 				if (lines.Length == 1) {
-					clip = lines [1];
+					clip = lines [0];
 				} else {
 					List<AudioClip> elegibleLines = new List<AudioClip> ();
 					foreach (AudioClip aClip in lines) {
