@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines:
-  - {fileID: 8300000, guid: 4d28ea7dab12f43898ad5d32330109a9, type: 3}
+  - {fileID: 8300000, guid: c92fa62594e184e34804a1053344b8f8, type: 3}
   delays:
   - 0.5
   nextSceneName: Scene 3 Before
