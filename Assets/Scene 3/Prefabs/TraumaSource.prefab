@@ -140,7 +140,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 60
+  MaxDistance: 80
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -154,15 +154,15 @@ AudioSource:
       inSlope: 0
       outSlope: -1.002004
       tangentMode: 0
-    - time: 0.3553406
-      value: 0.3067677
-      inSlope: -1.0019541
-      outSlope: -1.0019541
+    - time: 0.17382245
+      value: 0.09747566
+      inSlope: -0.33257636
+      outSlope: -0.33257636
       tangentMode: 0
     - time: 1
       value: 0
-      inSlope: -1.002004
-      outSlope: 0
+      inSlope: -0.38917777
+      outSlope: -0.38917777
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -222,7 +222,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
@@ -241,7 +241,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxDistance
-      value: 60
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Radius
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].time
+      value: 0.17382245
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].value
+      value: 0.09747566
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].inSlope
+      value: -0.38917777
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].outSlope
+      value: -0.38917777
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].inSlope
+      value: -0.33257636
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].outSlope
+      value: -0.33257636
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
