@@ -24,6 +24,5 @@ public class InteractivePoint : MonoBehaviour {
 	public void StopPoint()
 	{
 		audioSource.Stop ();
-		gameObject.SetActive (false);
 	}
 }

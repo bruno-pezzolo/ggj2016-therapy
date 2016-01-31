@@ -644,7 +644,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 33ce2df5ea85f4ae3a0bc24451ecae19, type: 3}
   - {fileID: 8300000, guid: d31cd1705382a46f696ab08c4eb72260, type: 3}
   lastLine: {fileID: 8300000, guid: f2a827276a603453bbba2518dd627885, type: 3}
-  nextPoint: {fileID: 0}
+  nextSceneName: Scene 1 After
 --- !u!1001 &1398340259
 Prefab:
   m_ObjectHideFlags: 0

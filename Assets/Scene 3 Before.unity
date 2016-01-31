@@ -264,3 +264,4 @@ MonoBehaviour:
   delays:
   - 1
   - 0
+  nextSceneName: Scene 3

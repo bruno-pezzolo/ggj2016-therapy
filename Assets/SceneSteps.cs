@@ -35,6 +35,7 @@ public class SceneSteps : MonoBehaviour {
 	private bool finished = false;
 	private bool collided = false;
 
+	public string nextSceneName;
 	public float initialDelay;
 	public AudioClip[] lines1;
 	public float[] lineDelays1;
@@ -65,9 +66,10 @@ public class SceneSteps : MonoBehaviour {
 		fadeInRain = false;
 
 		float initialFadeOutTime = Time.fixedTime;
+		float initialFadeOutVolume = rainAudioSource.volume;
 
 		while (rainAudioSource.volume > 0.0f) {
-			rainAudioSource.volume = 1 - 0.01f * (Time.fixedTime - initialFadeOutTime);
+			rainAudioSource.volume = initialFadeOutVolume - 0.01f * (Time.fixedTime - initialFadeOutTime);
 			yield return new WaitForSeconds (1);
 		}
 		rainAudioSource.volume = 0.0f;
@@ -108,10 +110,9 @@ public class SceneSteps : MonoBehaviour {
 		yield return null;
 	}
 
-	IEnumerator FinishSceneCoroutine () {
-		Debug.Log ("Wait Some time ");
+	IEnumerator FinishSceneCoroutine () {		
 		yield return new WaitForSeconds(3);
-		Debug.Log("Goes to next scene");
+		SceneManager.LoadScene (nextSceneName);
 	}
 
 	void OnCarCollisionEnter (GameObject car) {
