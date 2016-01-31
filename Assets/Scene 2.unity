@@ -390,7 +390,7 @@ MonoBehaviour:
     delay: 3
     line: {fileID: 0}
     wasClose: 0
-  - x: 0
+  - x: 20
     z: 500
     speed: 200
     delay: 3

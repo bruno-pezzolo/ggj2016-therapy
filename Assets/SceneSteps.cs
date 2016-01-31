@@ -82,13 +82,17 @@ public class SceneSteps : MonoBehaviour {
 			yield return null;
 		}
 
-		if (gameOverLines.Length > 0) yield return null;
+		yield return new WaitForSeconds (2);
 
-		int random = Random.Range(0,gameOverLines.Length);
-		AudioSource shrinkAudioSource = player.transform.FindChild ("Shrink Audio Source").GetComponent<AudioSource>();
-		AudioClip gameOverLine = gameOverLines [random];
-		shrinkAudioSource.PlayOneShot(gameOverLine);
-		yield return new WaitForSeconds(gameOverLine.length);
+		if (gameOverLines.Length != 0) {
+
+			int random = Random.Range (0, gameOverLines.Length);
+			AudioSource shrinkAudioSource = player.transform.FindChild ("Shrink Audio Source").GetComponent<AudioSource> ();
+			AudioClip gameOverLine = gameOverLines [random];
+			shrinkAudioSource.PlayOneShot (gameOverLine);
+			yield return new WaitForSeconds (gameOverLine.length);
+		}
+
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 
@@ -130,7 +134,7 @@ public class SceneSteps : MonoBehaviour {
 		foreach (Transform carTransform in cars) {
 			GameObject aCar = carTransform.gameObject;
 			if (car != aCar) {
-				aCar.SetActive (false);
+				Destroy (aCar);
 			}
 		}
 
@@ -138,8 +142,10 @@ public class SceneSteps : MonoBehaviour {
 		passengerAudioSource.volume = 0;
 	}
 
-	void OnCarCollisionFinished () {	
+	void OnCarCollisionFinished (GameObject car) {	
 		StartCoroutine (FadeRainOut ());
+
+		Destroy (car);
 
 		if (finished)
 			StartCoroutine (FinishSceneCoroutine ());
@@ -204,22 +210,22 @@ public class SceneSteps : MonoBehaviour {
 		yield return new WaitForSeconds(initialDelay);
 
 		// Shrink lines
-		for (int i = 0; i < lines1.Length; i++) {
-			AudioClip clip = lines1 [i];
-			shrinkAudioSource.PlayOneShot (clip);
-			yield return new WaitForSeconds(clip.length);
-			if (i == rainLineIndex) {
-				startRainSound ();
-			}
-			yield return new WaitForSeconds(lineDelays1[i]);
-		}
-
-		// Dad lines
-		for (int i = 0; i < lines2.Length; i++) {
-			AudioClip clip = lines2 [i];
-			passengerAudioSource.PlayOneShot (clip);
-			yield return new WaitForSeconds(clip.length + lineDelays2[i]);
-		}
+//		for (int i = 0; i < lines1.Length; i++) {
+//			AudioClip clip = lines1 [i];
+//			shrinkAudioSource.PlayOneShot (clip);
+//			yield return new WaitForSeconds(clip.length);
+//			if (i == rainLineIndex) {
+//				startRainSound ();
+//			}
+//			yield return new WaitForSeconds(lineDelays1[i]);
+//		}
+//
+//		// Dad lines
+//		for (int i = 0; i < lines2.Length; i++) {
+//			AudioClip clip = lines2 [i];
+//			passengerAudioSource.PlayOneShot (clip);
+//			yield return new WaitForSeconds(clip.length + lineDelays2[i]);
+//		}
 
 		player.GetComponent<FirstPersonController>().toggleHorizontalMovement(true);
 

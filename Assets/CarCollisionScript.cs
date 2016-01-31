@@ -23,7 +23,7 @@ public class CarCollisionScript : MonoBehaviour {
 
 	private IEnumerator DelayedCallback(float time) {
 		yield return new WaitForSeconds(time);
-		collisionDelegate.BroadcastMessage ("OnCarCollisionFinished");
+		collisionDelegate.BroadcastMessage ("OnCarCollisionFinished", this.gameObject);
 	}
 
 	public void PlaySoundWithCallback(AudioClip clip) {

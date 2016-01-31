@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionDelegate: {fileID: 0}
-  collisionSound: {fileID: 8300000, guid: ecea0e24b232a4063828075c28045f19, type: 3}
+  collisionSound: {fileID: 8300000, guid: d34cb89b9059841a8afe65779a3b4b34, type: 3}
 --- !u!114 &11433758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -579,6 +579,10 @@ Prefab:
       propertyPath: m_Radius
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: collisionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d34cb89b9059841a8afe65779a3b4b34, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181264}
