@@ -364,6 +364,7 @@ MonoBehaviour:
   lineDelays2:
   - 2
   - 2
+  lastLine: {fileID: 8300000, guid: b7d954c5b41ae482ca3bb50123e768d7, type: 3}
   carSpawns:
   - x: -20
     z: 0
@@ -397,10 +398,10 @@ MonoBehaviour:
     wasClose: 0
   carPrefab: {fileID: 414506, guid: dd773e56bb44a4673baf58b76ceb565b, type: 2}
   passingLines:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: b69273b470cea4317a65106f0588e2fa, type: 3}
   gameOverLines:
   - {fileID: 8300000, guid: 6dfa00642f7bb4ba590341d895f682c2, type: 3}
-  finalCollisionAudio: {fileID: 8300000, guid: ecea0e24b232a4063828075c28045f19, type: 3}
+  finalCollisionAudio: {fileID: 8300000, guid: 79c1a42cd83424810bb48b4fb3dc9f24, type: 3}
   cars: {fileID: 1057647902}
 --- !u!4 &850548305
 Transform:
